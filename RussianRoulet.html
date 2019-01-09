@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<script>
+
+let maxNumber = prompt("Введите максимальное число участников: ");
+maxNumber = parseInt(maxNumber);
+let winners = prompt("Введите количество победителей: ");
+winners = parseInt(winners);
+
+if ((winners > 0) && (winners < maxNumber)) {
+    let n = 0;
+	let z = 0;
+	do { 
+		n = (Math.random() * maxNumber);
+		n = Math.round(n);
+		z++;
+		alert(z + " победитель: " + n);
+	} while (z != winners)
+} else {
+	alert("Вы ошиблись!");
+}
+
+
+</script>
