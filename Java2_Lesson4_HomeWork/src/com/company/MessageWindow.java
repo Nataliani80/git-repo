@@ -11,9 +11,8 @@ public class MessageWindow extends JFrame {
         setTitle("Messenger");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(300, 300, 400, 400);
-        
+
         JPanel correspondenceField = new JPanel();
-        correspondenceField.setBackground(Color.LIGHT_GRAY);
         correspondenceField.setLayout(new BoxLayout(correspondenceField, BoxLayout.Y_AXIS));
         add(correspondenceField, BorderLayout.CENTER);
 
@@ -26,7 +25,7 @@ public class MessageWindow extends JFrame {
         JPanel inputMessageContainer = new JPanel();
         inputMessageContainer.setBackground(Color.WHITE);
         add(inputMessageContainer, BorderLayout.PAGE_END);
-        inputMessageContainer.setPreferredSize(new Dimension(400,60));
+        inputMessageContainer.setPreferredSize(new Dimension(400,35));
         inputMessageContainer.setLayout(new BoxLayout(inputMessageContainer, BoxLayout.X_AXIS));
 
         JTextField inputMessage = new JTextField();
@@ -38,7 +37,7 @@ public class MessageWindow extends JFrame {
         inputMessage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                messages.append(inputMessage.getText() + "\n\r");
+                messages.append(inputMessage.getText() + "\n");
                 inputMessage.setText(null);
             }
         });
@@ -46,7 +45,7 @@ public class MessageWindow extends JFrame {
         sendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                messages.append(inputMessage.getText() + "\n\r");
+                messages.append(inputMessage.getText() + "\n");
                 inputMessage.setText(null);
             }
         });
