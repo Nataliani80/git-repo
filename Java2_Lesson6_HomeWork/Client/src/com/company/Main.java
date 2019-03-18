@@ -7,8 +7,6 @@ public class Main {
         Client client = new Client();
         client.openConnection();
         client.initReceiver();
-        while (true) {
-            client.processMessage();
-        }
+        client.processMessage();
     }
 }

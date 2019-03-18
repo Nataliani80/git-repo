@@ -6,9 +6,7 @@ public class Main {
         ChatServer chatServer = new ChatServer();
         chatServer.chatServer();
         chatServer.initReceiver();
-        while (true) {
-            chatServer.processMessage();
-        }
+        chatServer.processMessage();
 
     }
 }

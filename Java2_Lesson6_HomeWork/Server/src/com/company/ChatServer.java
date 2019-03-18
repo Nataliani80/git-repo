@@ -5,12 +5,15 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Scanner;
 
-public class ChatServer {
+class ChatServer {
 
     DataInputStream inputStream;
     DataOutputStream outputStream;
+    boolean chatIsActiv = true;
 
     void chatServer() {
         try (ServerSocket serverSocket = new ServerSocket(8080)) {
@@ -30,36 +33,45 @@ public class ChatServer {
     }
     void initReceiver() {
         Thread thread = new Thread(() -> {
-            while (true) {
+            while (chatIsActiv) {
                 try {
                     String incomingMessage = inputStream.readUTF();
-                    System.out.println(incomingMessage);
                     if (incomingMessage.equalsIgnoreCase("/end")) {
                         System.out.println("Chat is closed");
-                        break;
+                        chatIsActiv = false;
+                    } else {
+                        System.out.println(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime())
+                                + "\n" + "Message from client: " + incomingMessage);
                     }
-                } catch (IOException exception) {
+                } catch (Exception exception) {
                     exception.printStackTrace();
+                    chatIsActiv = false;
                 }
             }
+            System.exit(0);
         });
-        thread.setDaemon(true);
         thread.start();
     }
 
 
     void processMessage() {
-        Scanner scanner = new Scanner(System.in);
-        String message = scanner.nextLine();
-        if(!message.equals(" ")) {
-            sendMessage(message);
+        while (chatIsActiv) {
+            Scanner scanner = new Scanner(System.in);
+            String message = scanner.nextLine();
+            if (message.equalsIgnoreCase("/end")) {
+                sendMessage(message);
+                System.out.println("Chat is closed");
+                chatIsActiv = false;
+            } else if(!message.equals("")) {
+                sendMessage(message);
+            }
         }
-
+        System.exit(0);
     }
 
-    void sendMessage(String message) {
+    private void sendMessage(String message) {
         try {
-            outputStream.writeUTF("Message from server: " + message);
+            outputStream.writeUTF( message);
         } catch (IOException e) {
             e.printStackTrace();
         }
