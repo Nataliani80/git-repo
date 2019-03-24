@@ -1,10 +1,10 @@
 public class Team {
 
-    private String teamNane;
+    private String teamName;
     Animal[] members;
 
     public Team(String teamName, Animal[] members) {
-        this.teamNane = teamName;
+        this.teamName = teamName;
         this.members = members;
     }
 
@@ -17,7 +17,7 @@ public class Team {
     void showResults() {
         for (Animal teamMember : members) {
             if (teamMember.isOnDistance()) {
-                System.out.println("В команде " + teamNane + " участник: " + teamMember.getName() + " прошел всю дистанцию.");
+                System.out.println("В команде " + teamName + " участник: " + teamMember.getName() + " прошел всю дистанцию.");
             }
         }
     }
